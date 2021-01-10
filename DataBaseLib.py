@@ -69,20 +69,20 @@ class DataBase:
     def getDateReturn(self,ID):         return self.__Case[ID].getDateReturn()
     def getDateOut(self,ID):            return self.__Case[ID].getDateOut() 
 
-    def addClient(self,ObjClient): 
+    def addClient(self,Obj): 
        for ITEM in self.__Client:
-           if(ITEM.getID() == ObjClient.getID()) :  return 0
-       self.__Client.append(ObjClient)
+           if(ITEM.getID() == Obj.getID()) :  return 0
+       self.__Client.append(Obj)
 
-    def addAuto(self,ObjRoute): 
+    def addAuto(self,Obj): 
         for ITEM in self.__Auto:
-           if(ITEM.getID() == ObjRoute.getID()) :   return 0
-        self.__Auto.append(ObjRoute)
+           if(ITEM.getID() == Obj.getID()) :   return 0
+        self.__Auto.append(Obj)
 
-    def addCase(self, ObjVouchers): 
+    def addCase(self, Obj): 
         for ITEM in self.__Case:
-           if(ITEM.getID() == ObjVouchers.getID()): return 0
-        self.__Case.append(ObjVouchers)
+           if(ITEM.getID() == Obj.getID()): return 0
+        self.__Case.append(Obj)
 
     def removeClient(self,ID): 
         for ITEM in self.__Client:
@@ -100,7 +100,7 @@ class DataBase:
 
     def removeCase(self, ID): 
         for ITEM in self.__Case:
-            if(ITEM.getID() == ID): self.__Case.pop(ITEM.getID()); return 0
+            if(ITEM.getID() == ID): self.__Case.pop(ITEM.getID() - 1); return 0
 
 # Класс работы с JSON файлами
 class DataBase_JSON(DataBase):
@@ -134,7 +134,7 @@ class DataBase_JSON(DataBase):
 
             L_Clients, L_Auto, L_Case = [], [], []
 
-            for item in self._DataBase__Client():
+            for item in self._DataBase__Client:
                 CL = {
                     "ID":           item.getID(),
                     "FirstName":    item.getFirstName(),
@@ -145,7 +145,7 @@ class DataBase_JSON(DataBase):
                 }
                 L_Clients.append(CL)
 
-            for item in self._DataBase__Auto():
+            for item in self._DataBase__Auto:
                 CL = {
                     "ID":           item.getID(),
                     "Mark":         item.getMark(),
@@ -155,7 +155,7 @@ class DataBase_JSON(DataBase):
                 }                                          
                 L_Auto.append(CL)
             
-            for item in self._DataBase__Case():
+            for item in self._DataBase__Case:
                 CL = {
                     "ID":           item.getID(),                           
                     "Client":       item.getClient().getID(),             
@@ -197,7 +197,6 @@ class DataBase_SQLite(DataBase):
             CL = Case(int(ITEM[0]),self._DataBase__Client.getByID(int(ITEM[1])),self._DataBase__Auto.getByID(int(ITEM[2])),ITEM[3],ITEM[4])
             self._DataBase__Case.append(CL)
 
-
     def WriteFile(self, FileName): 
 
         if FileName == "": print("\t --- ВЫ НЕ ВВЕЛИ НАЗВАНИЕ ФАЙЛА!!!"); return 0 
@@ -212,30 +211,30 @@ class DataBase_SQLite(DataBase):
         MyDataBase.commit()
 
         MyClietn    = [ [
-            self._DataBase__Client()[I].getID(),
-            self._DataBase__Client()[I].getFirstName(),
-            self._DataBase__Client()[I].getFatherName(),
-            self._DataBase__Client()[I].getLastName(), 
-            self._DataBase__Client()[I].getPhone(),
-            self._DataBase__Client()[I].getAdress()
-            ] for I in range(len(self._DataBase__Client())) ]
+            self._DataBase__Client[I].getID(),
+            self._DataBase__Client[I].getFirstName(),
+            self._DataBase__Client[I].getFatherName(),
+            self._DataBase__Client[I].getLastName(), 
+            self._DataBase__Client[I].getPhone(),
+            self._DataBase__Client[I].getAdress()
+            ] for I in range(len(self._DataBase__Client)) ]
 
 
         MyAuto     = [ [
-            self._DataBase__Auto()[I].getID(),
-            self._DataBase__Auto()[I].getMark(),
-            self._DataBase__Auto()[I].getCaseCost(),
-            self._DataBase__Auto()[I].getCost(), 
-            self._DataBase__Auto()[I].getTyp()
-            ] for I in range(len(self._DataBase__Auto())) ] 
+            self._DataBase__Auto[I].getID(),
+            self._DataBase__Auto[I].getMark(),
+            self._DataBase__Auto[I].getCaseCost(),
+            self._DataBase__Auto[I].getCost(), 
+            self._DataBase__Auto[I].getTyp()
+            ] for I in range(len(self._DataBase__Auto)) ] 
         
         MyCase  = [ [
-            self._DataBase__Case()[I].getID(),
-            self._DataBase__Case()[I].getClient().getID(),
-            self._DataBase__Case()[I].getAuto().getID(),
-            self._DataBase__Case()[I].getDateReturn(), 
-            self._DataBase__Case()[I].getDateOut()
-            ] for I in range(len(self._DataBase__Case())) ]
+            self._DataBase__Case[I].getID(),
+            self._DataBase__Case[I].getClient().getID(),
+            self._DataBase__Case[I].getAuto().getID(),
+            self._DataBase__Case[I].getDateReturn(), 
+            self._DataBase__Case[I].getDateOut()
+            ] for I in range(len(self._DataBase__Case)) ]
 
         for ID in range(len(MyClietn)): 
             SQLite.execute(f"SELECT ID FROM Client WHERE ID = {MyClietn[ID][0]}")
