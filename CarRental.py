@@ -22,10 +22,10 @@ def Task_1():
     print("\n\n\t>> Клиенты: <<\n")
     for Count in BD.getClientList():    print(Count,'\n')
     
-    print("\n\n\t>> Маршруты: <<\n")
+    print("\n\n\t>> Автомобили: <<\n")
     for Count in BD.getAutoList():      print(Count,'\n')
     
-    print("\n\n\t>> Путёвки: <<\n")
+    print("\n\n\t>> Выданные автомобили: <<\n")
     for Count in BD.getCaseList():      print(Count,'\n')
 
     print("...........................................................")
@@ -45,10 +45,10 @@ def Task_2():
     print("\n\n\t>> Клиенты: <<\n")
     for Count in BD.getClientList():    print(Count,'\n')
     
-    print("\n\n\t>> Маршруты: <<\n")
+    print("\n\n\t>> Автомобили: <<\n")
     for Count in BD.getAutoList():      print(Count,'\n')
     
-    print("\n\n\t>> Путёвки: <<\n")
+    print("\n\n\t>> Выданные автомобили: <<\n")
     for Count in BD.getCaseList():      print(Count,'\n')
     
     print("...........................................................")
