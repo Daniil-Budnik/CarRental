@@ -40,7 +40,7 @@ def Task_2():
     BD.ReadFile("MyDataBase.db")
 
     print("...........................................................")
-
+    
     # Выводим всю информацию
     print("\n\n\t>> Клиенты: <<\n")
     for Count in BD.getClientList():    print(Count,'\n')
@@ -52,6 +52,7 @@ def Task_2():
     for Count in BD.getCaseList():      print(Count,'\n')
     
     print("...........................................................")
+
 
 # Метод генерирует тестовые базы данных
 def GeneratorBD():
@@ -83,15 +84,15 @@ def GeneratorBD():
     BD.addAuto(AUTO[0]);        BD.addAuto(AUTO[1]);        BD.addAuto(AUTO[2])
     BD.addCase(CASE[0]);        BD.addCase(CASE[1]);        BD.addCase(CASE[2])
 
-    BD_JSON.setClientList(BD.getClientList)
-    BD_JSON.setAutoList(BD.getAutoList)
-    BD_JSON.setCaseList(BD.getCaseList)
+    BD_JSON.setClientList(BD.getClientList())
+    BD_JSON.setAutoList(BD.getAutoList())
+    BD_JSON.setCaseList(BD.getCaseList())
     
     BD_JSON.WriteFile("MyDataBase.json")
 
-    BD_SQL.setClientList(BD.getClientList)
-    BD_SQL.setCaseList(BD.getCaseList)
-    BD_SQL.setAutoList(BD.getAutoList)
+    BD_SQL.setClientList(BD.getClientList())
+    BD_SQL.setCaseList(BD.getCaseList())
+    BD_SQL.setAutoList(BD.getAutoList())
     
     BD_SQL.WriteFile("MyDataBase.db")
 
